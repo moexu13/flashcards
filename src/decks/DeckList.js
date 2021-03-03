@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import DeckCard from "./DeckCard";
 
 const DeckList = ({ decks }) => {
-  // console.log("deck list", decks);
   const buildDeckList = decks.map(deck => (
     <Link to={`decks/${deck.id}`} key={deck.id} >
       <section key={deck.id}>
@@ -13,6 +12,9 @@ const DeckList = ({ decks }) => {
   ));
   return (
     <div className="decks-list">
+      <Link to="/decks/new">
+        <button className="btn btn-primary create-deck">Create New Deck</button>
+      </Link>
       {buildDeckList}
     </div>
   );

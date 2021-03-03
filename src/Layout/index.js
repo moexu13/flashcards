@@ -1,9 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
+// import Footer from "./Footer";
 import NotFound from "./NotFound";
 import DeckDetail from "../decks/DeckDetail";
 import DeckList from "../decks/DeckList";
+import CreateDeckForm from "../create_deck/CreateDeckForm";
+
+import "../sass/style.scss";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -37,6 +41,9 @@ function Layout() {
           <Route exact path="/">
             <DeckList decks={decks} />
           </Route>
+          <Route exact path="/decks/new">
+            <CreateDeckForm />
+          </Route>
           <Route path="/decks/:deckId">
             <DeckDetail decks={decks} />
           </Route>
@@ -45,6 +52,7 @@ function Layout() {
           </Route>
         </Switch>
       </div>
+      {/* <Footer /> */}
     </Fragment>
   );
 }
