@@ -41,6 +41,7 @@ h2,
 h3,
 h4 {
   font-family: $title-font, serif;
+  font-size: 3rem;
   letter-spacing: 2px;
   text-align: center;
   text-shadow: 2px 2px 8px rgba($color-black, 0.2);
@@ -52,7 +53,7 @@ h1 {
 
 h2 {
   color: $color-secondary;
-  font-size: 3rem;
+  font-size: 2.6rem;
 
   @include respond(tab-port) {
     font-size: 2.4rem;

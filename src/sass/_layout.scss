@@ -19,6 +19,16 @@
   }
 }
 
+.header {
+  background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
+
+  &__lead {
+    font-size: 1.4rem;
+    margin-top: 1.4rem;
+    text-align: center;
+  }
+}
+
 // .wrapper {
 //   background-image: url("../images//library.jpeg");
 //   height: 100vh;
