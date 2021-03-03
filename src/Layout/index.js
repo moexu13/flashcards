@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 // import Footer from "./Footer";
 import NotFound from "./NotFound";
+import { createDeck } from "../utils/api/index";
 import DeckDetail from "../decks/DeckDetail";
 import DeckList from "../decks/DeckList";
 import CreateDeckForm from "../create_deck/CreateDeckForm";
@@ -11,6 +12,10 @@ import "../sass/style.scss";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
+
+  const addNewDeck = (formData) => {
+    createDeck(formData);
+  }
 
   useEffect(() => {
     setDecks([]);
@@ -42,7 +47,7 @@ function Layout() {
             <DeckList decks={decks} />
           </Route>
           <Route exact path="/decks/new">
-            <CreateDeckForm />
+            <CreateDeckForm createDeck={addNewDeck} />
           </Route>
           <Route path="/decks/:deckId">
             <DeckDetail decks={decks} />
