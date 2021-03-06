@@ -1,28 +1,59 @@
+.action__buttons {
+  margin-bottom: 3rem;
+  margin-top: 1.8rem;
+}
+
+.button {
+  background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
+  border: none;
+  color: $color-white;
+  font-family: $title-font;
+  
+  &:hover {
+    background-image: linear-gradient(to right bottom, $color-tertiary, $color-tertiary-dark);
+    border: none;
+  }
+}
+
+.button-create-deck {
+  padding: .5rem 2rem;
+}
+
+.btn-md {
+  background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary);
+  border: none;
+  color: $color-white;
+  font-size: 1.4rem;
+  padding: .8rem 1.6rem;
+  
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
 .footer {
   background-image: linear-gradient(
     to bottom,
-    rgba($color-white, 0.85) 0%,
-    $color-white 50%,
+    $color-white 0%,
+    rgba($color-white, 0.9) 10%,
+    rgba($color-white, 0.7) 20%,
     transparent 50%),
-    url("../images/magic.jpeg");
+    url("/images/magic.jpeg");
   background-size: 100%;
   bottom: 0;
+  height: 30rem;
   left: 0;
-  position: fixed;
-  width: 100%;;
-  
-
-  &__background img {
-    height: 30rem;
-    object-fit: cover;
-    width: 100%;
-  }
+  margin-top: 5rem;
+  object-fit: cover;
+  width: 100%;
 }
 
 .header {
   background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
+  border-radius: 0;
 
   &__lead {
+    color: $color-white;
     font-size: 1.4rem;
     margin-top: 1.4rem;
     text-align: center;

@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 import NotFound from "./NotFound";
-import { createDeck } from "../utils/api/index";
+import { createDeck, listDecks } from "../utils/api/index";
 import DeckDetail from "../decks/DeckDetail";
 import DeckList from "../decks/DeckList";
 import CreateDeckForm from "../create_deck/CreateDeckForm";
@@ -14,27 +14,22 @@ function Layout() {
   const [decks, setDecks] = useState([]);
 
   const addNewDeck = (formData) => {
+    // await response, then redirect to new detail page
     createDeck(formData);
   }
 
   useEffect(() => {
     setDecks([]);
-    const url = `${process.env.REACT_APP_API_BASE_URL}/decks?_embed=cards`;
-    const abortController = new AbortController();
     const loadDecks = async () => {
       try {
-        const response = await fetch(url, { signal: abortController.signal });
-        const decksFromAPI = await response.json();
-        setDecks(decksFromAPI);
+        const response = await listDecks();
+        setDecks(response);
       } catch (error) {
         // TODO: show error message
         console.log(error);
       }
     }
     loadDecks();
-    return () => {
-      abortController.abort();
-    }
   }, []); 
   
   return (
@@ -57,7 +52,7 @@ function Layout() {
           </Route>
         </Switch>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </Fragment>
   );
 }

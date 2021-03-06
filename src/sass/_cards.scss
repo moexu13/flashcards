@@ -9,7 +9,7 @@
   margin-top: 2rem;
   overflow: hidden;
   padding: 2rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   width: 70%;
 
   &:hover {
@@ -18,11 +18,19 @@
   }
 }
 
-.deck-card--title {
-  background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary);
-  color: $color-white;
+.deck-card__title {
+  // background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary);
+  color: $color-primary;
   font-size: 2rem;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  padding-bottom: 2px;
   text-align: center;
+
+  &--separator {
+    background: linear-gradient(to right, $color-primary-light, $color-primary);
+    border: none;
+    height: 2px;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    width: 75%;
+  }
 }

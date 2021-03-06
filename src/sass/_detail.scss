@@ -1,0 +1,13 @@
+.deck-detail {
+  margin: 2rem;
+
+  & h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+.edit--deck {
+  color: $color-secondary-dark;
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba($color-black, 0.2);
+}

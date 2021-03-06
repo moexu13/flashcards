@@ -52,7 +52,10 @@ h1 {
 }
 
 h2 {
-  color: $color-secondary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(to right, $color-primary, $color-primary-dark);
+  color: transparent;
   font-size: 2.6rem;
 
   @include respond(tab-port) {
@@ -65,9 +68,18 @@ h2 {
 }
 
 h3 {
-  font-size: 2.2rem;
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
 
   @include respond(tab-port) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
+}
+
+p {
+  color: $color-black;
+}
+
+.icon {
+  box-shadow: 2px 2px 2px rgba($color-black, 0.02);
 }
