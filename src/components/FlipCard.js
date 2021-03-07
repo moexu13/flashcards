@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({ card }) => {
+const FlipCard = ({ card }) => {
   return (
     <div>
       <p>Q: {card.front}</p>
@@ -9,4 +9,4 @@ const Card = ({ card }) => {
   );
 }
 
-export default Card;
+export default FlipCard;

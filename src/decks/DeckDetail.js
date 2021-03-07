@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faEdit, faPlus, faTrashAlt } from "@fortawesome/pro-light-svg-icons";
-import Card from "./Card";
+import Card from "../components/FlipCard";
 
 const DeckDetail = ({ decks }) => {
   const { deckId } = useParams();

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DeckCard from "./DeckCard";
+import DeckCard from "../components/DeckCard";
 
 const DeckList = ({ decks }) => {
   const buildDeckList = decks.map(deck => (

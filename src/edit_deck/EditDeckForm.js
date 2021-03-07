@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateDeckForm = ({ createDeck, deck = {} }) => {
+const EditDeckForm = ({ createDeck, deck = {} }) => {
   const initialFormState = {
     name: "",
     description: ""
@@ -55,4 +55,4 @@ const CreateDeckForm = ({ createDeck, deck = {} }) => {
   );
 }
 
-export default CreateDeckForm;
+export default EditDeckForm;

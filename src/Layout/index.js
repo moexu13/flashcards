@@ -5,8 +5,8 @@ import Footer from "./Footer";
 import NotFound from "./NotFound";
 import { createDeck, listDecks } from "../utils/api/index";
 import DeckDetail from "../decks/DeckDetail";
-import DeckList from "../decks/DeckList";
-import CreateDeckForm from "../create_deck/CreateDeckForm";
+import DeckList from "../root/DeckList";
+import EditDeckForm from "../edit_deck/EditDeckForm";
 
 import "../sass/style.scss";
 
@@ -42,7 +42,7 @@ function Layout() {
             <DeckList decks={decks} />
           </Route>
           <Route exact path="/decks/new">
-            <CreateDeckForm createDeck={addNewDeck} />
+            <EditDeckForm createDeck={addNewDeck} deck={null} />
           </Route>
           <Route path="/decks/:deckId">
             <DeckDetail decks={decks} />
