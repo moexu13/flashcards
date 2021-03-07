@@ -36,20 +36,27 @@
 }
 
 .footer {
-  background-image: linear-gradient(
-    to bottom,
-    $color-white 0%,
-    rgba($color-white, 0.9) 10%,
-    rgba($color-white, 0.7) 20%,
-    transparent 50%),
-    url("/images/magic.jpeg");
-  background-size: 100%;
-  bottom: 0;
-  height: 30rem;
-  left: 0;
+  height: 27rem;
   margin-top: 5rem;
-  object-fit: cover;
+  position: relative;
   width: 100%;
+  
+  &__image-container {
+    background-image: linear-gradient(
+      to bottom,
+      $color-white 0%,
+      rgba($color-white, 0.9) 10%,
+      rgba($color-white, 0.7) 20%,
+      transparent 50%),
+      url("/images/magic.jpeg");
+    background-size: 100%;
+    bottom: 0;
+    height: 27rem;
+    left: 0;
+    position: fixed;
+    object-fit: cover;
+    width: 100%;
+  }
 }
 
 .header {
