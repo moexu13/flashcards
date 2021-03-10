@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faEdit, faPlus, faTrashAlt } from "@fortawesome/pro-light-svg-icons";
 import Card from "../components/FlipCard";
 
-const DeckDetail = ({ decks, handleEditClick }) => {
+const DeckDetail = ({ decks, handleEditClick, handleDeleteClick }) => {
   const { deckId } = useParams();
 
-  if (decks.length === 0) {
+  if (decks.length === 0 || !deckId) {
     return (<div>Loading...</div>);
   }
   
@@ -29,7 +29,8 @@ const DeckDetail = ({ decks, handleEditClick }) => {
           <button className="btn-md button button--add">
             <FontAwesomeIcon icon={faPlus} className="icon" /> Add Card
           </button>
-          <button className="btn-md button button--delete">
+          <button className="btn-md button button--delete" 
+            onClick={() => handleDeleteClick(deckId)}>
             <FontAwesomeIcon icon={faTrashAlt} className="icon" /> Delete Deck
           </button>
         </div>

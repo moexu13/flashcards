@@ -4,7 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import NotFound from "./NotFound";
-import { createDeck, listDecks, readDeck, updateDeck } from "../utils/api/index";
+import { createDeck, deleteDeck, listDecks, readDeck, updateDeck } from "../utils/api/index";
 import DeckDetail from "../decks/DeckDetail";
 import DeckList from "../root/DeckList";
 import CreateDeckForm from "../create_deck/CreateDeckForm";
@@ -67,6 +67,13 @@ function Layout() {
     setPageName(`Edit ${deck.name}`)
     history.push(`/decks/${deckId}/edit`);
   }
+
+  const handleDeleteClick = async (deckId) => {
+    setPageName("");
+    history.push("/");
+    await deleteDeck(deckId);
+    await loadDecks();
+  }
   
   return (
     <Fragment>
@@ -92,7 +99,11 @@ function Layout() {
             />
           </Route>
           <Route path="/decks/:deckId">
-            <DeckDetail decks={decks} handleEditClick={handleEditClick} />
+            <DeckDetail 
+              decks={decks} 
+              handleEditClick={handleEditClick} 
+              handleDeleteClick={handleDeleteClick}  
+            />
           </Route>
           <Route path="*">
             <NotFound />
