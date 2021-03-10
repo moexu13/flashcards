@@ -14,11 +14,41 @@
   }
 }
 
-.btn-submit {
-  background-image: linear-gradient($color-secondary-light, $color-secondary);
+.btn-md {
+  background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
+  border: none;
   color: $color-white;
+  font-size: 1.4rem;
+  padding: .8rem 1.6rem;
+  
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
+}
+
+.button {
+  background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
+  border: none;
+  color: $color-white;
+  font-family: $title-font;
+  letter-spacing: 1px;
+  
+  &:hover {
+    background-image: linear-gradient(to right bottom, $color-tertiary, $color-tertiary-dark);
+    outline: none;
+  }
+}
+
+.button--create-deck {
+  padding: .5rem 2rem;
+}
+
+
+.button--submit {
+  margin: 0 auto;
   margin-bottom: 2rem;
   margin-top: 3rem;
+  padding: .5rem 2.2rem;
 
   @include respond(phone) {
     margin-bottom: 1rem;
@@ -28,16 +58,6 @@
 
   @include respond(tiny-phone) {
     width: 16rem;
-  }
-
-  &:hover {
-    background-image: linear-gradient($color-primary-light, $color-primary);
-    color: $color-white;
-    outline: none;
-  }
-
-  &:active {
-    outline: none;
   }
 }
 

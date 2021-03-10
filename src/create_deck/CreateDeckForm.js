@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-const EditDeckForm = ({ editDeck, deck, pageName }) => {
-  const initialFormData = {
-    name: deck.name,
-    description: deck.description
-  };
-
-  const [formData, setFormData] = useState(initialFormData);
+const CreateDeckForm = ({ createDeck, pageName }) => {
+  const initialFormState = {
+    name: "",
+    description: ""
+  }
+  const [formData, setFormData] = useState({ ...initialFormState });
   
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
@@ -14,9 +13,8 @@ const EditDeckForm = ({ editDeck, deck, pageName }) => {
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
-    deck.name = formData.name;
-    deck.description = formData.description;
-    editDeck(deck);
+    createDeck(formData);
+    setFormData({ ...initialFormState });
   }
   
   return (
@@ -49,7 +47,7 @@ const EditDeckForm = ({ editDeck, deck, pageName }) => {
             ></textarea>
           </div>
           <div className="row">
-            <button className="button button--submit">Update</button>
+            <button className="button button--submit">Create</button>
           </div>
         </form>
       </div>
@@ -57,4 +55,4 @@ const EditDeckForm = ({ editDeck, deck, pageName }) => {
   );
 }
 
-export default EditDeckForm;
+export default CreateDeckForm;

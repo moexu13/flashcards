@@ -3,40 +3,12 @@
   margin-top: 1.8rem;
 }
 
-.button {
-  background-image: linear-gradient(to right bottom, $color-primary, $color-primary-dark);
-  border: none;
-  color: $color-white;
-  font-family: $title-font;
-  
-  &:hover {
-    background-image: linear-gradient(to right bottom, $color-tertiary, $color-tertiary-dark);
-    border: none;
-
-    &:active {
-      border: none;
-    }
-  }
-}
-
-.button--create-deck {
-  padding: .5rem 2rem;
-}
-
-.btn-md {
-  background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary);
-  border: none;
-  color: $color-white;
-  font-size: 1.4rem;
-  padding: .8rem 1.6rem;
-  
-  &:not(:last-child) {
-    margin-right: 2rem;
-  }
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "\00BB";
 }
 
 .footer {
-  height: 27rem;
+  height: 20rem;
   margin-top: 5rem;
   position: relative;
   width: 100%;
@@ -51,7 +23,7 @@
       url("/images/magic.jpeg");
     background-size: 100%;
     bottom: 0;
-    height: 27rem;
+    height: 20rem;
     left: 0;
     position: fixed;
     object-fit: cover;
@@ -76,4 +48,11 @@
     margin-right: .8rem;
     width: 3.5rem;
   }
+}
+
+.nav ol {
+  background-color: $color-white;
+  font-size: 1.6rem;
+  margin-bottom: 1.6rem;
+  padding: 0;
 }
