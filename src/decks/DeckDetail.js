@@ -2,9 +2,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faEdit, faPlus, faTrashAlt } from "@fortawesome/pro-light-svg-icons";
-import Card from "../components/FlipCard";
+import DetailCard from "../components/DetailCard";
 
-const DeckDetail = ({ decks, handleEditClick, handleDeleteClick }) => {
+const DeckDetail = ({ decks, handleAddCardClick, handleEditClick, handleDeleteClick }) => {
   const { deckId } = useParams();
 
   if (decks.length === 0 || !deckId) {
@@ -13,7 +13,7 @@ const DeckDetail = ({ decks, handleEditClick, handleDeleteClick }) => {
   
   const deck = decks.find(item => `${item.id}` === deckId);
   const cards = deck.cards.map(card => (
-    <div key={card.id} className="deck-card"><Card card={card} /></div>)
+    <div key={card.id} className="deck-card"><DetailCard card={card} /></div>)
   );
 
   return (
@@ -26,7 +26,7 @@ const DeckDetail = ({ decks, handleEditClick, handleDeleteClick }) => {
           <button className="btn-md button button--study">
             <FontAwesomeIcon icon={faBook} className="icon" /> Study Deck
           </button>
-          <button className="btn-md button button--add">
+          <button className="btn-md button button--add" onClick={() => handleAddCardClick(deckId)}>
             <FontAwesomeIcon icon={faPlus} className="icon" /> Add Card
           </button>
           <button className="btn-md button button--delete" 

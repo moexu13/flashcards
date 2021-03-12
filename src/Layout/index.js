@@ -4,11 +4,13 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Nav from "./Nav";
 import NotFound from "./NotFound";
-import { createDeck, deleteDeck, listDecks, readDeck, updateDeck } from "../utils/api/index";
+import { createCard, createDeck, deleteDeck, listDecks, readDeck, updateDeck } 
+  from "../utils/api/index";
 import DeckDetail from "../decks/DeckDetail";
 import DeckList from "../root/DeckList";
 import CreateDeckForm from "../create_deck/CreateDeckForm";
 import EditDeckForm from "../edit_deck/EditDeckForm";
+import CreateCardForm from "../create_card/CreateCardForm";
 
 import "../sass/style.scss";
 
@@ -21,6 +23,7 @@ function Layout() {
   
   // await response, then redirect to detail page
   const addDeck = async (formData) => {
+    console.log(formData);
     const response = await createDeck(formData);
     await loadDecks();
     setDeck(response);
@@ -35,6 +38,13 @@ function Layout() {
     setDeck(deck);
     setPageName(deck.name);
     history.push(`/decks/${deck.id}`);
+  }
+
+  const addCard = async (deckId, formData) => {
+    await createCard(deckId, formData);
+    await loadDecks();
+    setPageName(deck.name);
+    history.push(`/decks/${deckId}`);
   }
 
   const loadDecks = async () => {
@@ -74,6 +84,11 @@ function Layout() {
     await deleteDeck(deckId);
     await loadDecks();
   }
+
+  const handleAddCardClick = (deckId) => {
+    setPageName("Add New Card");
+    history.push(`/decks/${deckId}/cards/new`);
+  }
   
   return (
     <Fragment>
@@ -91,16 +106,23 @@ function Layout() {
               pageName="Create New Deck"  
             />
           </Route>
-          <Route path="/decks/:deckId/edit">
+          <Route exact path="/decks/:deckId/edit">
             <EditDeckForm 
               editDeck={editDeck} 
               deck={deck} 
               pageName={pageName}  
             />
           </Route>
-          <Route path="/decks/:deckId">
+          <Route exact path="/decks/:deckId/cards/new">
+            <CreateCardForm
+              createCard={addCard}
+              pageName={pageName}
+            />
+          </Route>
+          <Route exact path="/decks/:deckId">
             <DeckDetail 
               decks={decks} 
+              handleAddCardClick={handleAddCardClick}
               handleEditClick={handleEditClick} 
               handleDeleteClick={handleDeleteClick}  
             />

@@ -20,10 +20,10 @@ const EditDeckForm = ({ editDeck, deck, pageName }) => {
   }
   
   return (
-    <section id="deck-form" className="deck-form">
-      <h2 className="create-deck__heading">{pageName}</h2>
+    <section id="form" className="form">
+      <h2 className="form__heading">{pageName}</h2>
       <div className="form__container">
-        <form name="create-new-deck" onSubmit={handleSubmit} >
+        <form name="edit-form" onSubmit={handleSubmit} >
           <div className="form-group mt-4">
             <label htmlFor="name" className="form-label">Name</label>
             <input

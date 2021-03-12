@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-const CreateDeckForm = ({ createDeck, pageName }) => {
+const CreateCardForm = ({ createCard, pageName }) => {
+  const { deckId } = useParams();
   const initialFormState = {
-    name: "",
-    description: ""
+    front: "",
+    back: ""
   }
   const [formData, setFormData] = useState({ ...initialFormState });
   
@@ -13,7 +15,7 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
-    createDeck(formData);
+    createCard(deckId, formData);
     setFormData({ ...initialFormState });
   }
   
@@ -23,26 +25,26 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
       <div className="form__container">
         <form name="create-form" onSubmit={handleSubmit} >
           <div className="form-group mt-4">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              className="form-control"
-              onChange={handleChange}
-              value={formData.name}
-              required
-            />
-          </div>
-          <div className="form-group mt-4">
-            <label htmlFor="description" className="form-label">Description</label>
+            <label htmlFor="front" className="form-label">Front</label>
             <textarea
-              id="description"
-              name="description"
+              id="front"
+              name="front"
               className="form-control"
               rows="6"
               cols="50"
-              value={formData.description}
+              value={formData.front}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="form-group mt-4">
+            <label htmlFor="back" className="form-label">Back</label>
+            <textarea
+              id="back"
+              name="back"
+              className="form-control"
+              rows="6"
+              cols="50"
+              value={formData.back}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -55,4 +57,4 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
   );
 }
 
-export default CreateDeckForm;
+export default CreateCardForm;

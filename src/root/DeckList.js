@@ -11,7 +11,7 @@ const DeckList = ({ decks }) => {
   return (
     <div className="decks-list">
       <Link to="/decks/new">
-        <button className="button button--create-deck">+ New Deck</button>
+        <button className="button button--create">+ New Deck</button>
       </Link>
       {buildDeckList}
     </div>
