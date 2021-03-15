@@ -1,7 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faEdit, faPlus, faTrashAlt } from "@fortawesome/pro-light-svg-icons";
 import DetailCard from "../components/DetailCard";
 
 const DeckDetail = ({ decks, handleAddCardClick, handleEditClick, handleDeleteClick }) => {
@@ -21,17 +19,17 @@ const DeckDetail = ({ decks, handleAddCardClick, handleEditClick, handleDeleteCl
       <div className="row justify-content-center">
         <div className="action__buttons">
           <button className="btn-md button button--edit" onClick={() => handleEditClick(deckId)}>
-            <FontAwesomeIcon icon={faEdit} className="icon" /> Edit Deck
+            Edit Deck
           </button>
           <button className="btn-md button button--study">
-            <FontAwesomeIcon icon={faBook} className="icon" /> Study Deck
+            Study Deck
           </button>
           <button className="btn-md button button--add" onClick={() => handleAddCardClick(deckId)}>
-            <FontAwesomeIcon icon={faPlus} className="icon" /> Add Card
+            Add Card
           </button>
           <button className="btn-md button button--delete" 
             onClick={() => handleDeleteClick(deckId)}>
-            <FontAwesomeIcon icon={faTrashAlt} className="icon" /> Delete Deck
+            Delete Deck
           </button>
         </div>
       </div>
