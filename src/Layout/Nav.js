@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Nav = ({ location, pageName })=> {
+const Nav = ({ location, pageName }) => {
   // console.log("location", location);
   // double right arrow &raquo;
   // const urls = location.split("/");

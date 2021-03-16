@@ -28,7 +28,8 @@ const DeckDetail = ({ decks, handleAddCardClick, handleEditClick, handleDeleteCl
             Add Card
           </button>
           <button className="btn-md button button--delete" 
-            onClick={() => handleDeleteClick(deckId)}>
+            onClick={() => {
+              if (window.confirm("Are you sure?")) handleDeleteClick(deckId)}}>
             Delete Deck
           </button>
         </div>

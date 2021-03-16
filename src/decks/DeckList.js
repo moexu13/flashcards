@@ -5,7 +5,7 @@ import DeckCard from "../components/DeckCard";
 const DeckList = ({ decks }) => {
   const buildDeckList = decks.map(deck => (
     <section key={deck.id}>
-      <DeckCard deck={deck} />
+      <DeckCard deck={deck} cardCount={deck.cards.length} />
     </section>
   ));
   return (
