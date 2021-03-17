@@ -1,35 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { readDeck } from "../utils/api/index";
+
 import DetailCard from "../components/DetailCard";
 
-const DeckDetail = ({ decks, handleAddCardClick, handleEditClick, handleDeleteClick }) => {
+const DeckDetail = 
+  ({ handleAddCardClick, handleEditDeckClick, handleDeleteDeckClick, 
+    handleEditCardClick, handleDeleteCardClick }) => {
   const { deckId } = useParams();
+  const [deck, setDeck] = useState({});
+  const [cards, setCards] = useState([]);
 
-  if (decks.length === 0 || !deckId) {
-    return (<div>Loading...</div>);
-  }
+  // if (!decks || decks.length === 0 || !deckId) {
+  //   return (<div>Loading...</div>);
+  // }
+
+  useEffect(() => {
+    setDeck({});
+    const loadDeck = async () => {
+      const response = await readDeck(deckId);
+      setDeck(response);
+      
+    }
+    loadDeck();
+  }, []);
+
+  useEffect(() => {
+    if (deck && deck.cards && deck.cards.length > 0) {
+      setCards(deck.cards.map(card => (
+        <div key={card.id} className="deck-card">
+          <DetailCard 
+            card={card} 
+            handleEditCardClick={handleEditCardClick} 
+            handleDeleteCardClick={handleDeleteCardClick}
+          />
+        </div>)
+      ));
+    }
+  }, [deck]);
   
-  const deck = decks.find(item => `${item.id}` === deckId);
-  const cards = deck.cards.map(card => (
-    <div key={card.id} className="deck-card"><DetailCard card={card} /></div>)
-  );
-
+  // if (deck && deck.cards && deck.cards.length > 0) {
+  //   setCards(deck.cards.map(card => (
+  //     <div key={card.id} className="deck-card"><DetailCard card={card} /></div>)
+  //   ));
+  // }
+  
   return (
     <section className="deck-detail">
       <div className="row justify-content-center">
-        <div className="action__buttons">
-          <button className="btn-md button button--edit" onClick={() => handleEditClick(deckId)}>
+        <div className="btn-group mb-5" role="group" aria-label="action buttons">
+          <button className="btn-md btn btn-primary mr-2" onClick={() => handleEditDeckClick(deckId)}>
             Edit Deck
           </button>
-          <button className="btn-md button button--study">
+          <button className="btn-md btn btn-primary mr-2">
             Study Deck
           </button>
-          <button className="btn-md button button--add" onClick={() => handleAddCardClick(deckId)}>
+          <button className="btn-md btn btn-primary mr-2" onClick={() => handleAddCardClick(deckId)}>
             Add Card
           </button>
-          <button className="btn-md button button--delete" 
+          <button className="btn-md btn btn-danger" 
             onClick={() => {
-              if (window.confirm("Are you sure?")) handleDeleteClick(deckId)}}>
+              if (window.confirm("Are you sure?")) handleDeleteDeckClick(deckId)}}>
             Delete Deck
           </button>
         </div>

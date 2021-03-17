@@ -7,10 +7,10 @@ const DeckCard = ({ deck, cardCount }) => {
     <div className="deck-card">
       <Link to={`decks/${deck.id}`}>
         <h2 className="deck-card__title">{deck.name}</h2>
+      </Link>
         <p className="deck-card__card-count">{cardText}</p>
         <hr className="deck-card__title--separator" />
         <p>{deck.description}</p>
-      </Link>
     </div>
   );
 }

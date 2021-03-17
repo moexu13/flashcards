@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { readDeck } from "../utils/api/index";
 
-const CreateDeckForm = ({ createDeck, pageName }) => {
-  const initialFormState = {
-    name: "",
-    description: ""
-  }
-  const [formData, setFormData] = useState({ ...initialFormState });
+const EditDeckForm = ({ editDeck, pageName }) => {
+  const { deckId } = useParams();
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    setFormData({});
+    const loadDeck = async () => {
+      const response = await readDeck(deckId);
+      setFormData(response);
+    }
+    loadDeck();
+  }, []);
   
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
@@ -13,15 +21,14 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
-    createDeck(formData);
-    setFormData({ ...initialFormState });
+    editDeck(formData);
   }
   
   return (
     <section id="form" className="form">
       <h2 className="form__heading">{pageName}</h2>
       <div className="form__container">
-        <form name="create-form" onSubmit={handleSubmit} >
+        <form name="edit-form" onSubmit={handleSubmit} >
           <div className="form-group mt-4">
             <label htmlFor="name" className="form-label">Name</label>
             <input
@@ -47,7 +54,7 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
             ></textarea>
           </div>
           <div className="row">
-            <button className="button button--submit">Create</button>
+            <button className="btn btn-primary">Update</button>
           </div>
         </form>
       </div>
@@ -55,4 +62,4 @@ const CreateDeckForm = ({ createDeck, pageName }) => {
   );
 }
 
-export default CreateDeckForm;
+export default EditDeckForm;

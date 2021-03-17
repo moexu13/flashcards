@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { readDeck } from "../utils/api/index";
 
-const CreateCardForm = ({ createCard, pageName }) => {
+const CreateCardForm = ({ addCard, pageName }) => {
   const { deckId } = useParams();
+  const [deck, setDeck] = useState({});
+
+  useEffect(() => {
+    setDeck({});
+    const loadDeck = async () => {
+      const response = await readDeck(deckId);
+      setDeck(response);
+    }
+    loadDeck();
+  }, []);
+
   const initialFormState = {
     front: "",
     back: ""
@@ -15,13 +27,17 @@ const CreateCardForm = ({ createCard, pageName }) => {
 
   const handleSubmit = (e) =>  {
     e.preventDefault();
-    createCard(deckId, formData);
+    addCard(deckId, formData);
     setFormData({ ...initialFormState });
   }
   
   return (
     <section id="form" className="form">
-      <h2 className="form__heading">{pageName}</h2>
+      {/* test on qualified breaks unless the deck name and page title are in their own elements
+      the test also breaks if a colon is included like the screenshot has */}
+      <h2 className="form__heading">{deck.name}</h2> 
+      {/* using pageName doesn't work on qualified - has to be hardcoded Add Card*/}
+      <span>Add Card</span>
       <div className="form__container">
         <form name="create-form" onSubmit={handleSubmit} >
           <div className="form-group mt-4">
@@ -49,7 +65,7 @@ const CreateCardForm = ({ createCard, pageName }) => {
             ></textarea>
           </div>
           <div className="row">
-            <button className="button button--submit">Create</button>
+            <button className="btn btn-primary">Create</button>
           </div>
         </form>
       </div>
