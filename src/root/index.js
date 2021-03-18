@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { createCard, createDeck, deleteDeck, listDecks, readDeck, updateCard, updateDeck } from "../utils/api/index";
+import { createCard, createDeck, deleteCard, deleteDeck, listDecks, readDeck, updateCard, updateDeck } from "../utils/api/index";
 
 import CreateCardForm from "../createcard/CreateCardForm";
 import CreateDeckForm from "../createdeck/CreateDeckForm";
@@ -9,6 +9,7 @@ import DeckDetail from "../decks/DeckDetail";
 import EditCardForm from "../editcard/EditCardForm";
 import EditDeckForm from "../editdeck/EditDeckForm";
 import NotFound from "../Layout/NotFound";
+import Study from "../study/Study";
 
 const Home = () => {
   const [decks, setDecks] = useState([]);
@@ -86,30 +87,49 @@ const Home = () => {
     history.push(`/decks/${card.deckId}/cards/${card.id}/edit`);
   }
 
-  const handleDeleteCardClick = (cardId) => {
-
+  const handleDeleteCardClick = async (deckId, cardId) => {
+    await deleteCard(cardId);
+    await loadDecks();
+    const response = await readDeck(deckId);
+    setDeck(response);
+    setPageName(response.name);
+    // TODO: trigger rerender
+    history.push(`/decks/${response.id}`);
   }
   
+  const handleStudyClick = async (deckId) => {
+    const response = await readDeck(deckId);
+    setDeck(response);
+    setPageName(response.name);
+    history.push(`/decks/${response.id}/study`);
+  }
+
   return (
     <Switch>
       <Route exact={true} path="/">
+        <DeckList decks={decks} />
+      </Route>
+      <Route exact={true} path="/decks">
         <DeckList decks={decks} />
       </Route>
       <Route exact={true} path="/decks/new">
         <CreateDeckForm pageName="Create Deck" createDeck={addDeck} />
       </Route>
       <Route exact={true} path="/decks/:deckId">
-        <DeckDetail 
-          decks={decks} 
+        <DeckDetail
           handleAddCardClick={handleAddCardClick}
           handleEditDeckClick={handleEditDeckClick} 
           handleDeleteDeckClick={handleDeleteDeckClick}
           handleEditCardClick={handleEditCardClick}
-          handleDeleteCardClick={handleDeleteCardClick}  
+          handleDeleteCardClick={handleDeleteCardClick}
+          handleStudyClick={handleStudyClick}  
         />
       </Route>
       <Route path="/decks/:deckId/edit">
         <EditDeckForm editDeck={editDeck} pageName={pageName} />
+      </Route>
+      <Route exact={true} path="/decks/:deckId/study">
+        <Study pageName={pageName} handleAddCardClick={handleAddCardClick} />
       </Route>
       <Route exact={true} path="/decks/:deckId/cards/new">
         <CreateCardForm addCard={addCard} pageName={pageName} />

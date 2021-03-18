@@ -12,7 +12,9 @@ const DetailCard = ({ card, handleEditCardClick, handleDeleteCardClick }) => {
           onClick={() => handleEditCardClick(card)}>Edit
         </button>
         <button className="btn btn-danger" 
-          onClick={() => handleDeleteCardClick(card.id)}>Delete
+          onClick={() => {
+            if (window.confirm("Are you sure?")) handleDeleteCardClick(card.deckId, card.id)}}>
+            Delete
         </button>
       </div>
     </div>

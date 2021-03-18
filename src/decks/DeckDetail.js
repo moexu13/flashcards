@@ -6,11 +6,12 @@ import DetailCard from "../components/DetailCard";
 
 const DeckDetail = 
   ({ handleAddCardClick, handleEditDeckClick, handleDeleteDeckClick, 
-    handleEditCardClick, handleDeleteCardClick }) => {
+    handleEditCardClick, handleDeleteCardClick, handleStudyClick }) => {
   const { deckId } = useParams();
-  const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
+  const [deck, setDeck] = useState({});
 
+  // this breaks qualified tests
   // if (!decks || decks.length === 0 || !deckId) {
   //   return (<div>Loading...</div>);
   // }
@@ -20,7 +21,6 @@ const DeckDetail =
     const loadDeck = async () => {
       const response = await readDeck(deckId);
       setDeck(response);
-      
     }
     loadDeck();
   }, []);
@@ -39,12 +39,6 @@ const DeckDetail =
     }
   }, [deck]);
   
-  // if (deck && deck.cards && deck.cards.length > 0) {
-  //   setCards(deck.cards.map(card => (
-  //     <div key={card.id} className="deck-card"><DetailCard card={card} /></div>)
-  //   ));
-  // }
-  
   return (
     <section className="deck-detail">
       <div className="row justify-content-center">
@@ -52,7 +46,7 @@ const DeckDetail =
           <button className="btn-md btn btn-primary mr-2" onClick={() => handleEditDeckClick(deckId)}>
             Edit Deck
           </button>
-          <button className="btn-md btn btn-primary mr-2">
+          <button className="btn-md btn btn-primary mr-2" onClick={() => handleStudyClick(deckId)}>
             Study Deck
           </button>
           <button className="btn-md btn btn-primary mr-2" onClick={() => handleAddCardClick(deckId)}>
