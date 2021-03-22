@@ -31,7 +31,6 @@ const Study = ({ handleAddCardClick }) => {
       setCount(count + 1);
       setDisplayFront(true);
     } else {
-      console.log("restart");
       const restart = window.confirm("You've reached the end of the deck. Restart?");
       if (restart) {
         setCount(0);
