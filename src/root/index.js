@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { createCard, createDeck, deleteCard, deleteDeck, listDecks, readDeck, updateCard, updateDeck } from "../utils/api/index";
 
-import CreateCardForm from "../createcard/CreateCardForm";
+import CreateUpdateCardForm from "../forms/CreateUpdateCardForm";
 import CreateEditDeckForm from "../forms/CreateUpdateDeckForm";
 import DeckList from "../decks/DeckList";
 import DeckDetail from "../decks/DeckDetail";
-import EditCardForm from "../editcard/EditCardForm";
 import NotFound from "../Layout/NotFound";
 import Study from "../study/Study";
 
 const Home = () => {
   const [decks, setDecks] = useState([]);
-  const [deck, setDeck] = useState({});
   const [pageName, setPageName] = useState("");
   const history = useHistory();
 
@@ -30,22 +28,6 @@ const Home = () => {
     loadDecks();
   }, []);
 
-  const addCard = async (deckId, formData) => {
-    await createCard(deckId, formData);
-    await loadDecks();
-    setPageName(deck.name);
-    history.push(`/decks/${deckId}`);
-  }
-
-  const editCard = async (deckId, card) => {
-    await updateCard(card);
-    await loadDecks();
-    const response = await readDeck(deckId);
-    setDeck(response);
-    setPageName(response.name);
-    history.push(`/decks/${response.id}`);
-  }
-
   const createOrUpdateCard = async (deckId, formData) => {
     if (formData.id) {
       await updateCard(formData);
@@ -54,7 +36,6 @@ const Home = () => {
     }
     await loadDecks();
     const response = await readDeck(deckId);
-    setDeck(response);
     setPageName(response.name);
     history.push(`/decks/${response.id}`);
   }
@@ -67,14 +48,12 @@ const Home = () => {
       response = await createDeck(formData);
     }
     await loadDecks();
-    setDeck(response);
     setPageName(response.name);
     history.push(`/decks/${response.id}`);
   }
 
   const handleEditDeckClick = async (deckId) => {
     const deck = await readDeck(deckId);
-    setDeck(deck);
     setPageName(`Edit ${deck.name}`)
     history.push(`/decks/${deckId}/edit`);
   }
@@ -100,7 +79,6 @@ const Home = () => {
     await deleteCard(cardId);
     await loadDecks();
     const response = await readDeck(deckId);
-    setDeck(response);
     setPageName(response.name);
     // TODO: trigger rerender
     history.push(`/decks/${response.id}`);
@@ -108,7 +86,6 @@ const Home = () => {
   
   const handleStudyClick = async (deckId) => {
     const response = await readDeck(deckId);
-    setDeck(response);
     setPageName(response.name);
     history.push(`/decks/${response.id}/study`);
   }
@@ -141,10 +118,10 @@ const Home = () => {
         <Study pageName={pageName} handleAddCardClick={handleAddCardClick} />
       </Route>
       <Route exact={true} path="/decks/:deckId/cards/new">
-        <CreateCardForm addCard={addCard} pageName={pageName} />
+        <CreateUpdateCardForm createOrUpdateCard={createOrUpdateCard} pageName={pageName} />
       </Route>
       <Route path="/decks/:deckId/cards/:cardId">
-        <EditCardForm editCard={editCard} pageName={pageName} />
+        <CreateUpdateCardForm createOrUpdateCard={createOrUpdateCard} pageName={pageName} />
       </Route>
       <Route path="*">
         <NotFound />
